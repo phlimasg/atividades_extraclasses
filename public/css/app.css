@@ -1,0 +1,85 @@
+body,html{
+    width: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+}
+.form-control, .btn{
+    border-radius: 0px;
+}
+@media (max-width: 768px){
+    .menu-collapse{
+        padding: 0px;
+    }
+}
+@media (min-width: 768px){
+    .navbar-header {
+        padding-left: 15px;
+        float: unset;
+    }
+    .container-fluid{
+        width: 100%;
+        padding-left: 0px;
+    }
+    .navbar {
+        border-radius: 0px;
+        height: 100vh;
+        position: fixed;            
+        left: 0;
+        width: 15%;
+    }
+    .menu{
+        background-color: #222;
+    }
+    .navbar-collapse {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+    .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+        margin-right: -15px;
+        margin-left: unset;
+    }
+    .nav-pills>li>a {
+        border-radius: 0px;
+    }
+    .bottom{
+        bottom: 0;
+        margin-bottom: 0px;
+        position: fixed;
+    }
+    .dropdown-menu {        
+        width: 99%;  
+        margin: 1px 1px 1px 4px;        
+        text-align: left;        
+        border: 1px solid rgba(0,0,0,.15);        
+        border-radius: 0px;
+    }
+    .submenu{
+        padding: 10px;
+        border-bottom: 1px solid rgba(0,0,0,.15);
+    }
+    .submenu:hover{        
+        background-color: rgb(192, 192, 192);
+    }
+    @-o-keyframes glowing {
+        0% { background-color: #357fb0; box-shadow: 0 0 3px #357fb0; }
+        50% { background-color: rgb(192, 50, 50); box-shadow: 0 0 3px rgb(192, 50, 50); }
+        100% { background-color: #357fb0; box-shadow: 0 0 3px #357fb0; }
+      }
+      
+      @keyframes glowing {
+        0% { background-color: #357fb0; box-shadow: 0 0 3px #357fb0; }
+        50% { background-color: rgb(192, 50, 50); box-shadow: 0 0 3px rgb(192, 50, 50); }
+        100% { background-color: #357fb0; box-shadow: 0 0 3px #357fb0; }
+      }
+    .btn-add{
+        margin-top: 25px;        
+    }
+    .btn-pisca{
+        -webkit-animation: glowing 1500ms infinite;
+        -moz-animation: glowing 1500ms infinite;
+        -o-animation: glowing 1500ms infinite;
+        animation: glowing 1500ms infinite;
+    }
+
+
+}
