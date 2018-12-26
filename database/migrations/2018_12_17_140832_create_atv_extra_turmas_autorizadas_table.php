@@ -14,13 +14,17 @@ class CreateAtvExtraTurmasAutorizadasTable extends Migration
     public function up()
     {
         Schema::create('atv_extra_turmas_autorizadas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('cod_turma');
+            $table->increments('id');            
             $table->string('user');
-            $table->unsignedInteger('atv_extra_horario_id');
-            $table->foreign('atv_extra_horario_id')
+            $table->unsignedInteger('turmas_id');
+            $table->unsignedInteger('atv_extra_turma_id');
+            $table->foreign('atv_extra_turma_id')
                 ->references('id')
-                ->on('atv_extra_horarios')
+                ->on('atv_extra_turmas')
+                ->onDelete('cascade');
+            $table->foreign('turmas_id')
+                ->references('id')
+                ->on('turmas')
                 ->onDelete('cascade');
             $table->timestamps();
         });

@@ -432,6 +432,8 @@ class ComposerStaticInitbacecda1b68372de6c2867c3f016732c
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AtividadesExtrasController' => __DIR__ . '/../..' . '/app/Http/Controllers/AtividadesExtrasController.php',
+        'App\\Http\\Controllers\\AtividadesExtrasTurmasController' => __DIR__ . '/../..' . '/app/Http/Controllers/AtividadesExtrasTurmasController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -447,8 +449,8 @@ class ComposerStaticInitbacecda1b68372de6c2867c3f016732c
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Model\\UVW_STE_ALUNOS_E_RESPONSAVEIS' => __DIR__ . '/../..' . '/app/Model/UVW_STE_ALUNOS_E_RESPONSAVEIS.php',
         'App\\Model\\atv_extra' => __DIR__ . '/../..' . '/app/Model/atv_extra.php',
-        'App\\Model\\atv_extra_horario' => __DIR__ . '/../..' . '/app/Model/atv_extra_horario.php',
         'App\\Model\\atv_extra_turma' => __DIR__ . '/../..' . '/app/Model/atv_extra_turma.php',
         'App\\Model\\atv_extra_turmas_autorizadas' => __DIR__ . '/../..' . '/app/Model/atv_extra_turmas_autorizadas.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -457,6 +459,7 @@ class ComposerStaticInitbacecda1b68372de6c2867c3f016732c
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\turmas' => __DIR__ . '/../..' . '/app/turmas.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
         'BeyondCode\\DumpServer\\Dumper' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/Dumper.php',
@@ -4216,6 +4219,7 @@ class ComposerStaticInitbacecda1b68372de6c2867c3f016732c
         'phpDocumentor\\Reflection\\Types\\String_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/String_.php',
         'phpDocumentor\\Reflection\\Types\\This' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/This.php',
         'phpDocumentor\\Reflection\\Types\\Void_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Void_.php',
+        'turmas' => __DIR__ . '/../..' . '/database/seeds/turmas.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

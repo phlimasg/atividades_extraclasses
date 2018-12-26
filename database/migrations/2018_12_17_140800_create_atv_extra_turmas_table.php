@@ -16,8 +16,13 @@ class CreateAtvExtraTurmasTable extends Migration
         Schema::create('atv_extra_turmas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao_turma');
-            $table->unsignedInteger('atv_extra_id');
+            $table->time('hora_ini');
+            $table->time('hora_fim')->nullable();
+            $table->integer('vagas');
+            $table->string('valor');
+            $table->string('dia');
             $table->string('user');
+            $table->unsignedInteger('atv_extra_id');            
             $table->foreign('atv_extra_id')
                 ->references('id')
                 ->on('atv_extras')
