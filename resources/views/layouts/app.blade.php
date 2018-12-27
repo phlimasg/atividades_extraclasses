@@ -36,13 +36,13 @@
                               </div>
                               <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav nav-pills nav-stacked">
-                                  <li><a href="#"> <span class="glyphicon glyphicon-home"></span> Dashboard</a></li> 
+                                  <li><a href="/home"> <span class="glyphicon glyphicon-home"></span> Dashboard</a></li> 
                                   <li role="presentation" class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                            <span class="glyphicon glyphicon-flag"></span> Inscrições <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <a href="">
+                                        <a href="{{route('insc_index')}}">
                                                 <div class="submenu">
                                                     <span class="glyphicon glyphicon-plus"></span> Inscrever Aluno
                                                 </div>                                                

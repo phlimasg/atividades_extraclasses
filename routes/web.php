@@ -37,9 +37,7 @@ Route::post('/atividades/turma/create/{id}','AtividadesExtrasTurmasController@st
 Route::get('/atividades/turma/show/{id}','AtividadesExtrasTurmasController@show')->name('turmas_show');
 Route::get('/atividades/turma/update/{id}','AtividadesExtrasTurmasController@edit')->name('turmas_edit');
 Route::post('/atividades/turma/update/{id}','AtividadesExtrasTurmasController@update')->name('turmas_update');
-//Cadastro de Horários
-Route::get('/atividades/turma/horarios/create/{id}','AtividadesExtrasTurmasHorariosController@create')->name('horarios_create');
-Route::post('/atividades/turma/horarios/create/{id}','AtividadesExtrasTurmasHorariosController@store')->name('horarios_store');
-Route::get('/atividades/turma/horarios/show/{id}','AtividadesExtrasTurmasHorariosController@show')->name('horarios_show');
-Route::get('/atividades/turma/horarios/update/{id}','AtividadesExtrasTurmasHorariosController@edit')->name('horarios_edit');
-Route::post('/atividades/turma/horarios/update/{id}','AtividadesExtrasTurmasHorariosController@update')->name('horarios_update');
+//Rotas de inscrições
+Route::get('/inscricao', 'InscricaoController@index')->name('insc_index');
+Route::post('/inscricao', 'InscricaoController@search')->name('insc_search');
+Route::get('/inscricao/{ra}', 'InscricaoController@show')->name('insc_show');
