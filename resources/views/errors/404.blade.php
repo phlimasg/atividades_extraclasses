@@ -17,7 +17,7 @@
     <iframe src="https://giphy.com/embed/9Y5BbDSkSTiY8" width="350" frameBorder="0" class="disable" style="margin-left: -65px"></iframe>
     @else
     <h1>
-        Página não encontrada...
+        Desculpe, não encontramos a página solicitada.
     </h1>
     @endif
     
