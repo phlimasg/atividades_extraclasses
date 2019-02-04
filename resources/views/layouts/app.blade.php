@@ -81,28 +81,7 @@
                                                 </a>
                                         </ul>                                        
                                     </li>                                 
-                                  <li role="presentation" class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                           <span class="glyphicon glyphicon-user"></span> Usuários <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <a href="">
-                                                <div class="submenu">
-                                                    <span class="glyphicon glyphicon-plus"></span> Adicionar
-                                                </div>                                                
-                                            </a>  
-                                            <a href="">
-                                                <div class="submenu">
-                                                    <span class="glyphicon glyphicon-pencil"></span> Editar
-                                                </div>
-                                            </a>
-                                            <a href="">
-                                                    <div class="submenu">
-                                                        <span class="glyphicon glyphicon-remove"></span> Excluir
-                                                    </div>
-                                                </a>
-                                        </ul>                                        
-                                    </li>                                     
+                                    <li><a href="{{ route('user_index')}}"> <span class="glyphicon glyphicon-user"></span> Usuários</a></li>                                     
                                 </ul>
                                 <ul class="nav nav-pills nav-stacked navbar-inverse bottom">                                  
                                   <li><a href="#"><span class="glyphicon glyphicon-off"></span> Sair</a></li>

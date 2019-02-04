@@ -41,3 +41,7 @@ Route::post('/atividades/turma/update/{id}','AtividadesExtrasTurmasController@up
 Route::get('/inscricao', 'InscricaoController@index')->name('insc_index');
 Route::post('/inscricao', 'InscricaoController@search')->name('insc_search');
 Route::get('/inscricao/{ra}', 'InscricaoController@show')->name('insc_show');
+//Controle de Usuários
+Route::get('/usuarios', 'UserController@index')->name('user_index');
+Route::post('/usuarios', 'UserController@store')->name('user_save');
+Route::get('/usuarios/{id}', 'UserController@destroy')->name('user_destroy');
