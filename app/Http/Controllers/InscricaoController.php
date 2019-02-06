@@ -30,7 +30,7 @@ class InscricaoController extends Controller
         $request->validate([
             'search' => 'required'
         ]);
-        $t = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO')
+        $t = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','RESPFIN')
         ->where('RA', 'like','%'.$request->search)
         ->orWhere('NOME_ALUNO', 'like',$request->search.'%')
         ->get();        

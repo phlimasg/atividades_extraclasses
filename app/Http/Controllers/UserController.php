@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('admin.usuario.index', compact('user'));
+        return view('admin.usuario.user_index', compact('user'));
     }
 
     /**
@@ -42,6 +42,7 @@ class UserController extends Controller
         ],
             [
                 'required' => 'Campo Obrigatório',
+                'regex' => 'Somente email @lasalle'
             ]
         );
         try{
@@ -102,7 +103,7 @@ class UserController extends Controller
     {        
         try{
             User::destroy($id);            
-            return redirect()->back()->with('message' , 'Usuário excluido com sucesso!');
+            return redirect()->back()->with('message' , 'Usuário excluído com sucesso!');
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return view('errors.404',compact('message'));

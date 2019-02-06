@@ -31,8 +31,11 @@
                         <div class="col-sm-2">
                                 {{$i->RA}}
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                                 {{$i->NOME_ALUNO}}
+                        </div>
+                        <div class="col-sm-4">
+                            {{$i->RESPFIN}}
                         </div>
                         <div class="col-sm-2">
                         <a href="{{route('insc_show',['ra'=>$i->RA])}}" class="btn btn-primary">Inscrever</a>
@@ -44,9 +47,7 @@
                 <p><b>Desculpe...</b></p>
                 Não localizamos nenhum aluno.
             </div>
-        @endforelse        
-        
-        
+        @endforelse
     @endif
     
 </div>
