@@ -8,7 +8,8 @@
             </div>           
         </div>    
     <hr>
-    <form action="" method="POST">        
+    <form action="{{ route('insc_store', ['ra' => Request::segment(2)]) }}" method="POST">    
+        @csrf    
         @php($count = 0)
             @forelse ($atv as $i)       
                     @if ($i->atv_extra_id != $count)
@@ -43,12 +44,33 @@
             <br />
             <div class="row">
                 <div class="col-sm-offset-9 col-sm-2">
-                        <button type="submit" class="btn btn-lg btn-success"> Realizar inscrição</button>                         
+                        <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#confirma"> Realizar inscrição</button>                         
+                </div>
+
+            </div>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="confirma" role="dialog">
+                <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Aviso</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Deseja confirmar a inscrição do aluno(a) {{$aluno->NOME_ALUNO}}? </p>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" >Sim</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+                
                 </div>
             </div>
-                
-                
-            @endisset
+            @endif
     </form> 
 </div>
 @endsection

@@ -7,6 +7,7 @@ use App\Model\UVW_STE_ALUNOS_E_RESPONSAVEIS;
 use App\Model\turmas;
 use App\Model\atv_extra_turmas_autorizadas;
 use App\Model\atv_extra;
+use App\Model\atv_extra_turma;
 
 class InscricaoController extends Controller
 {
@@ -49,7 +50,12 @@ class InscricaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $atv = atv_extra_turma::whereIn('atv_extra_turmas.id',$request->atv)
+        ->join('atv_extras', 'atv_extra_turmas.atv_extra_id', 'atv_extras.id')
+        ->get();
+        //dd($atv);
+        return view('admin.insc.insc_confirma', compact('atv'));;
     }
 
     /**
