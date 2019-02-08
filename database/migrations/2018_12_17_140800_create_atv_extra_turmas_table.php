@@ -19,7 +19,7 @@ class CreateAtvExtraTurmasTable extends Migration
             $table->time('hora_ini');
             $table->time('hora_fim')->nullable();
             $table->integer('vagas');
-            $table->string('valor');
+            $table->float('valor');
             $table->string('dia');
             $table->string('user');
             $table->unsignedInteger('atv_extra_id');            

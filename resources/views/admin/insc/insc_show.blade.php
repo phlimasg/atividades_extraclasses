@@ -30,7 +30,7 @@
                             {{substr($i->hora_fim,0,5)}}
                         </div>
                         <div class="col-sm-1">
-                            {{$i->valor}}
+                            {{number_format($i->valor, 2, ',', ' ')}}
                         </div>
                     </div>                  
                     @php($count = $i->atv_extra_id)

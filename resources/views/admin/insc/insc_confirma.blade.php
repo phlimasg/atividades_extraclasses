@@ -24,7 +24,7 @@
                     <b>Turma:</b> {{$a->descricao_turma}}
                 </div>
                 <div class="col-sm-2">
-                    <b>Valor: </b>{{$a->valor}}
+                    <b>Valor: </b>{{number_format($a->valor, 2, ',', ' ')}}
                 </div>
             </div>        
         @php($total += $a->valor)        
@@ -36,7 +36,7 @@
     </div>
     <div class="row">
         <div class="col-sm-offset-9 col-sm-3">
-            <h2><b>Total: </b>{{$total}}</h2>
+            <h2><b>Total: </b>{{number_format($total, 2, ',', ' ')}}</h2>
         </div>
     </div>
     <br>
