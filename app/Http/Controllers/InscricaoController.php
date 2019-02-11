@@ -8,6 +8,9 @@ use App\Model\turmas;
 use App\Model\atv_extra_turmas_autorizadas;
 use App\Model\atv_extra;
 use App\Model\atv_extra_turma;
+use App\Model\inscricao;
+use Illuminate\Support\Facades\Auth;
+use Mpdf\Mpdf;
 
 class InscricaoController extends Controller
 {
@@ -50,12 +53,24 @@ class InscricaoController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        //dd($request->all());                
+
+        foreach ($request->atv as $a) {
+            $insc = new inscricao();
+            $insc->aluno_id = $request->mat;
+            $insc->pagamento = 0;
+            $insc->user = Auth::user()->email;
+            $insc->atv_extra_turma_id = $a;            
+            $insc->save();
+        }        
+        /*dd($atv);
+        
         $atv = atv_extra_turma::whereIn('atv_extra_turmas.id',$request->atv)
         ->join('atv_extras', 'atv_extra_turmas.atv_extra_id', 'atv_extras.id')
-        ->get();
+        ->get();*/
         //dd($atv);
-        return view('admin.insc.insc_confirma', compact('atv'));;
+        return redirect()->route('insc_pagamento', ['ra' => $request->mat]);
+        
     }
 
     /**
@@ -73,14 +88,17 @@ class InscricaoController extends Controller
             ->first();            
             $turma = substr($aluno->TURMA,0,7);
             //pesquisa as atividades para o aluno
-            $atv = atv_extra::select('atv_extra_turmas.atv_extra_id', 'descricao_atv', 'atv_extra_turmas.id', 'descricao_turma', 'hora_ini', 'hora_fim', 'valor', 'dia' )
+            $atv = atv_extra::select('vagas','atv_extra_turmas.atv_extra_id', 'descricao_atv', 'atv_extra_turmas.id', 'descricao_turma', 'hora_ini', 'hora_fim', 'valor', 'dia')            
             ->join('atv_extra_turmas', 'atv_extras.id', 'atv_extra_id') 
-            ->whereIn('atv_extra_turmas.id', atv_extra_turmas_autorizadas::select('atv_extra_turma_id')
+            ->selectRaw(inscricao::where('pagamento',1)->where('inscricaos.atv_extra_turma_id','atv_extra_turmas.id')->count().' as inscritos')
+            ->whereIn('atv_extra_turmas.id', 
+            atv_extra_turmas_autorizadas::select('atv_extra_turma_id')
                 ->whereIn('turmas_id',turmas::select('id')
-                    ->where('cod','like',$turma.'%')->first())
-                ->get())       
+                ->where('cod','like',$turma.'%')->first())
+                ->get())
+                ->groupBy('atv_extra_turmas.id')
             ->get(); 
-            //dd($atv) ;
+            //dd($atv);
             return view('admin.insc.insc_show', compact(['atv','aluno']));
         } catch (\Exception $e) {
             $message = $e->getMessage();
@@ -119,6 +137,35 @@ class InscricaoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        inscricao::destroy($id);
+        return redirect()->back();
+    }
+
+    public function pagamento($ra){
+        $atv = inscricao::where('inscricaos.aluno_id', $ra)
+        ->select('inscricaos.id','valor','descricao_turma','descricao_atv')
+        ->join('atv_extra_turmas','inscricaos.atv_extra_turma_id','atv_extra_turmas.id')
+        ->join('atv_extras', 'atv_extra_turmas.atv_extra_id','atv_extras.id')
+        ->get();
+        //dd($atv);
+        return view('admin.insc.insc_confirma', compact('atv'));
+    }
+    public function recibo($ra){
+        $aluno = UVW_STE_ALUNOS_E_RESPONSAVEIS::where('RA',$ra)->select('NOME_ALUNO','RESPFIN')->first();
+        //dd($aluno);
+        $atv = inscricao::where('inscricaos.aluno_id', $ra)
+        ->select('inscricaos.id','valor','descricao_turma','descricao_atv','hora_ini','hora_fim','dia')
+        ->join('atv_extra_turmas','inscricaos.atv_extra_turma_id','atv_extra_turmas.id')
+        ->join('atv_extras', 'atv_extra_turmas.atv_extra_id','atv_extras.id')
+        ->get();
+        //dd($atv);
+        $pdf = new Mpdf();
+        foreach($atv as $a){
+            $pdf->WriteHTML(view('admin.recibo.recibo', compact('a','aluno')));
+            $pdf->WriteHTML(view('admin.recibo.recibo', compact('a','aluno')));
+            $pdf->AddPage();
+        }        
+        $pdf->Output();
+        dd($atv);
     }
 }

@@ -10,6 +10,7 @@
     <hr>
     <form action="{{ route('insc_store', ['ra' => Request::segment(2)]) }}" method="POST">    
         @csrf    
+    <input type="hidden" name="mat" value="{{ Request::segment(2)}}">
         @php($count = 0)
             @forelse ($atv as $i)       
                     @if ($i->atv_extra_id != $count)
@@ -32,6 +33,12 @@
                         <div class="col-sm-1">
                             {{number_format($i->valor, 2, ',', ' ')}}
                         </div>
+                        <div class="col-sm-1">
+                                {{($i->vagas - $i->inscritos)}}
+                            </div>
+                            <div class="col-sm-1">
+                                    {{($i->inscritos)}}
+                                </div>
                     </div>                  
                     @php($count = $i->atv_extra_id)
             @empty

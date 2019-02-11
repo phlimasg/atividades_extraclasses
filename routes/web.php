@@ -42,6 +42,9 @@ Route::get('/inscricao', 'InscricaoController@index')->name('insc_index');
 Route::post('/inscricao', 'InscricaoController@search')->name('insc_search');
 Route::get('/inscricao/{ra}', 'InscricaoController@show')->name('insc_show');
 Route::post('/inscricao/{ra}', 'InscricaoController@store')->name('insc_store');
+Route::get('/pagamento/{ra}', 'InscricaoController@pagamento')->name('insc_pagamento');
+Route::get('/pagamento/{ra}/confirma', 'InscricaoController@recibo')->name('insc_recibo');
+Route::get('/remove/{id}', 'InscricaoController@destroy')->name('insc_destroy');
 //Controle de Usuários
 Route::get('/usuarios', 'UserController@index')->name('user_index');
 Route::post('/usuarios', 'UserController@store')->name('user_save');

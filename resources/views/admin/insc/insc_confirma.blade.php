@@ -20,11 +20,17 @@
                 <div class="col-sm-4">
                     <b>{{$a->descricao_atv}}</b>
                 </div>
+                <!--<div class="col-sm-1">
+                    <span class="glyphicon glyphicon-credit-card"></span>
+                </div>-->
                 <div class="col-sm-2">
                     <b>Turma:</b> {{$a->descricao_turma}}
                 </div>
                 <div class="col-sm-2">
                     <b>Valor: </b>{{number_format($a->valor, 2, ',', ' ')}}
+                </div>
+                <div class="col-sm-1">
+                <a href="{{ route('insc_destroy', ['id'=>$a->id]) }}"><span class="glyphicon glyphicon-remove"></span></a>
                 </div>
             </div>        
         @php($total += $a->valor)        
@@ -61,7 +67,7 @@
                     <p>Após confirmação, será gerado o recibo. </p>
                 </div>
                 <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" >Sim</button>
+                        <a href="{{ route('insc_recibo', ['id'=>Request::segment(2)]) }}" class="btn btn-success" >Sim</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
