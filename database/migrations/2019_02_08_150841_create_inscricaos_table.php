@@ -15,13 +15,14 @@ class CreateInscricaosTable extends Migration
     {
         Schema::create('inscricaos', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('aluno_id');
-            $table->bigInteger('atv_extra_turma_id');
+            $table->bigInteger('aluno_id');            
             $table->integer('pagamento');
-            $table->string('user');                       
+            $table->string('user');
+            $table->unsignedInteger('atv_extra_turma_id');               
             $table->foreign('atv_extra_turma_id')
                 ->references('id')
-                ->on('atv_extra_turmas');
+                ->on('atv_extra_turmas')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
