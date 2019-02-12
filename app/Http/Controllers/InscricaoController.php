@@ -149,9 +149,9 @@ class InscricaoController extends Controller
         ->select('inscricaos.id','valor','descricao_turma','descricao_atv','hora_ini','hora_fim','dia')
         ->join('atv_extra_turmas','inscricaos.atv_extra_turma_id','atv_extra_turmas.id')
         ->join('atv_extras', 'atv_extra_turmas.atv_extra_id','atv_extras.id')
-        ->get();
-        //dd($atv);
-        $pdf = new Mpdf(['tempDir' => assets('/pdf')]);
+        ->get();       
+
+        $pdf = new Mpdf(['tempDir' => storage_path('app\public')]);
         foreach($atv as $a){
             $pdf->WriteHTML(view('admin.recibo.recibo', compact('a','aluno')));
             $pdf->WriteHTML(view('admin.recibo.recibo', compact('a','aluno')));
