@@ -53,22 +53,14 @@ class InscricaoController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());                
-
-        foreach ($request->atv as $a) {
+        foreach ($request->atv as $a) {            
             $insc = new inscricao();
             $insc->aluno_id = $request->mat;
             $insc->pagamento = 0;
             $insc->user = Auth::user()->email;
             $insc->atv_extra_turma_id = $a;            
             $insc->save();
-        }        
-        /*dd($atv);
-        
-        $atv = atv_extra_turma::whereIn('atv_extra_turmas.id',$request->atv)
-        ->join('atv_extras', 'atv_extra_turmas.atv_extra_id', 'atv_extras.id')
-        ->get();*/
-        //dd($atv);
+        }
         return redirect()->route('insc_pagamento', ['ra' => $request->mat]);
         
     }
@@ -90,15 +82,15 @@ class InscricaoController extends Controller
             //pesquisa as atividades para o aluno
             $atv = atv_extra::select('vagas','atv_extra_turmas.atv_extra_id', 'descricao_atv', 'atv_extra_turmas.id', 'descricao_turma', 'hora_ini', 'hora_fim', 'valor', 'dia')            
             ->join('atv_extra_turmas', 'atv_extras.id', 'atv_extra_id') 
-            ->selectRaw(inscricao::where('pagamento',1)->where('inscricaos.atv_extra_turma_id','atv_extra_turmas.id')->count().' as inscritos')
+            ->selectRaw('(SELECT COUNT(*) from inscricaos WHERE pagamento = 1 AND inscricaos.atv_extra_turma_id = atv_extra_turmas.id) as inscritos')
             ->whereIn('atv_extra_turmas.id', 
             atv_extra_turmas_autorizadas::select('atv_extra_turma_id')
                 ->whereIn('turmas_id',turmas::select('id')
                 ->where('cod','like',$turma.'%')->first())
                 ->get())
                 ->groupBy('atv_extra_turmas.id')
-            ->get(); 
-            //dd($atv);
+                ->orderBy('descricao_atv')
+            ->get();
             return view('admin.insc.insc_show', compact(['atv','aluno']));
         } catch (\Exception $e) {
             $message = $e->getMessage();

@@ -17,29 +17,35 @@
                     <hr>    
                     <h3>{{$i->descricao_atv}}</h3>
                     @endif
-                    <div class="row" style="background-color: lightgrey; border-bottom: 1px solid white">
-                        <div class="col-sm-2">
-                            <label class="checkbox-inline"><input type="checkbox" name="atv[]" value="{{$i->id}}">{{$i->descricao_turma}}</label>
-                        </div>
-                        <div class="col-sm-6">
-                            {{$i->dia}}
-                        </div>
-                        <div class="col-sm-1">
-                            {{substr($i->hora_ini,0,5)}}
-                        </div>
-                        <div class="col-sm-1">
-                            {{substr($i->hora_fim,0,5)}}
-                        </div>
-                        <div class="col-sm-1">
-                            {{number_format($i->valor, 2, ',', ' ')}}
-                        </div>
-                        <div class="col-sm-1">
-                                {{($i->vagas - $i->inscritos)}}
+                    <div class="well @if (($i->vagas - $i->inscritos) == 0) text-danger @endif">
+                        <div class="row" >
+                            <div class="col-sm-2">
+                                <label class="checkbox-inline"><input type="checkbox" name="atv[]" value="{{$i->id}}">{{$i->descricao_turma}}</label>
+                            </div>
+                            <div class="col-sm-5">
+                                {{$i->dia}}
                             </div>
                             <div class="col-sm-1">
-                                    {{($i->inscritos)}}
+                                {{substr($i->hora_ini,0,5)}}
+                            </div>
+                            <div class="col-sm-1">
+                                {{substr($i->hora_fim,0,5)}}
+                            </div>
+                            <div class="col-sm-2">
+                                R$: {{number_format($i->valor, 2, ',', ' ')}}
+                            </div>
+                            <div class="col-sm-1 ">
+                                @if (($i->vagas - $i->inscritos) == 0)
+                                    <span class="glyphicon glyphicon-list-alt" data-toggle="tooltip" title="Lista de espera"></span>
+                                    @else
+                                    <span data-toggle="tooltip" title="Vagas restantes">{{($i->vagas - $i->inscritos)}}</span>
+                                    
+                                @endif
+                                    
                                 </div>
-                    </div>                  
+                        </div>                  
+
+                    </div>
                     @php($count = $i->atv_extra_id)
             @empty
                 <div class="alert alert-danger">
@@ -80,4 +86,9 @@
             @endif
     </form> 
 </div>
+<script>
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();   
+        });
+        </script>
 @endsection
