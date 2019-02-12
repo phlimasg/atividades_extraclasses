@@ -20,8 +20,7 @@ class CreateEsperasTable extends Migration
             $table->string('user');                       
             $table->foreign('atv_extra_turma_id')
                 ->references('id')
-                ->on('atv_extra_turmas')
-                ->onDelete('cascade');
+                ->on('atv_extra_turmas');
             $table->timestamps();
         });
     }
