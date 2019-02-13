@@ -40,6 +40,13 @@
             </div>    
         </div>
     </div>
+    <b>Em espera:</b> <br>
+    @forelse ($espera as $item)    
+        {{$item->descricao_atv}} <br>
+        {{$item->descricao_turma}} - {{$item->dia}} <br>
+    @empty
+        Lista de espera vazia
+    @endforelse
     <div class="row">
         <div class="col-sm-offset-9 col-sm-3">
             <h2><b>Total: </b>{{number_format($total, 2, ',', ' ')}}</h2>

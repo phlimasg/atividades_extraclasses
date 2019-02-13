@@ -11,6 +11,7 @@ use App\Model\atv_extra_turma;
 use App\Model\inscricao;
 use Illuminate\Support\Facades\Auth;
 use Mpdf\Mpdf;
+use App\Model\espera;
 
 class InscricaoController extends Controller
 {
@@ -53,14 +54,35 @@ class InscricaoController extends Controller
      */
     public function store(Request $request)
     {
-        foreach ($request->atv as $a) {            
-            $insc = new inscricao();
-            $insc->aluno_id = $request->mat;
-            $insc->pagamento = 0;
-            $insc->user = Auth::user()->email;
-            $insc->atv_extra_turma_id = $a;            
-            $insc->save();
-        }
+        foreach ($request->atv as $a) { 
+            //verifica se o aluno ja está inscrito           
+            $i = inscricao::where('aluno_id', $request->mat)
+            ->where('atv_extra_turma_id', $a)
+            ->where('pagamento', 1)
+            ->first();
+            $incritos = inscricao::where('pagamento',1)
+            ->where('atv_extra_turma_id',$a)
+            ->count();
+            $vagas = atv_extra_turma::select('vagas')->where('id',$a)->first();
+            $vgsobra = $vagas->vagas - $incritos;            
+            if(empty($i) && $vgsobra > 0){
+                $insc = new inscricao();
+                $insc->aluno_id = $request->mat;
+                $insc->pagamento = 0;
+                $insc->user = Auth::user()->email;
+                $insc->atv_extra_turma_id = $a;            
+                //echo('salvou');
+                $insc->save();
+            }elseif($vgsobra == 0){
+                $espera = new espera();
+                $espera->aluno_id = $request->mat;               
+                $espera->user = Auth::user()->email;
+                $espera->atv_extra_turma_id = $a;            
+                //echo('salvou');
+                $espera->save();
+            }
+                        //dd($insc);            
+        }        
         return redirect()->route('insc_pagamento', ['ra' => $request->mat]);
         
     }
@@ -82,7 +104,7 @@ class InscricaoController extends Controller
             //pesquisa as atividades para o aluno
             $atv = atv_extra::select('vagas','atv_extra_turmas.atv_extra_id', 'descricao_atv', 'atv_extra_turmas.id', 'descricao_turma', 'hora_ini', 'hora_fim', 'valor', 'dia')            
             ->join('atv_extra_turmas', 'atv_extras.id', 'atv_extra_id') 
-            ->selectRaw('(SELECT COUNT(*) from inscricaos WHERE pagamento = 1 AND inscricaos.atv_extra_turma_id = atv_extra_turmas.id) as inscritos')
+            ->selectRaw('(SELECT COUNT(*) from inscricaos WHERE pagamento = 1 AND inscricaos.atv_extra_turma_id = atv_extra_turmas.id) as inscritos')            
             ->whereIn('atv_extra_turmas.id', 
             atv_extra_turmas_autorizadas::select('atv_extra_turma_id')
                 ->whereIn('turmas_id',turmas::select('id')
@@ -90,7 +112,7 @@ class InscricaoController extends Controller
                 ->get())
                 ->groupBy('atv_extra_turmas.id')
                 ->orderBy('descricao_atv')
-            ->get();
+            ->get();            
             return view('admin.insc.insc_show', compact(['atv','aluno']));
         } catch (\Exception $e) {
             $message = $e->getMessage();
@@ -136,28 +158,37 @@ class InscricaoController extends Controller
     public function pagamento($ra){
         $atv = inscricao::where('inscricaos.aluno_id', $ra)
         ->select('inscricaos.id','valor','descricao_turma','descricao_atv')
+        ->where('pagamento',0)
         ->join('atv_extra_turmas','inscricaos.atv_extra_turma_id','atv_extra_turmas.id')
         ->join('atv_extras', 'atv_extra_turmas.atv_extra_id','atv_extras.id')
         ->get();
-        //dd($atv);
-        return view('admin.insc.insc_confirma', compact('atv'));
+        $espera = espera::where('aluno_id',$ra)
+        ->join('atv_extra_turmas','esperas.atv_extra_turma_id','atv_extra_turmas.id')
+        ->join('atv_extras', 'atv_extra_turmas.atv_extra_id','atv_extras.id')
+        ->get();        
+        return view('admin.insc.insc_confirma', compact('atv','espera'));
     }
     public function recibo($ra){
         $aluno = UVW_STE_ALUNOS_E_RESPONSAVEIS::where('RA',$ra)->select('NOME_ALUNO','RESPFIN')->first();
         //dd($aluno);
         $atv = inscricao::where('inscricaos.aluno_id', $ra)
-        ->select('inscricaos.id','valor','descricao_turma','descricao_atv','hora_ini','hora_fim','dia')
+        ->where('pagamento',0)
+        ->select('inscricaos.id','valor','descricao_turma','descricao_atv','hora_ini','hora_fim','dia','pagamento')
         ->join('atv_extra_turmas','inscricaos.atv_extra_turma_id','atv_extra_turmas.id')
         ->join('atv_extras', 'atv_extra_turmas.atv_extra_id','atv_extras.id')
-        ->get();       
-
+        ->get();
+        //dd($atv);
         $pdf = new Mpdf(['tempDir' => storage_path('app\public')]);
+        $count = 1;        
         foreach($atv as $a){
+            $a->pagamento = 1;
+            $a->save();
             $pdf->WriteHTML(view('admin.recibo.recibo', compact('a','aluno')));
-            $pdf->WriteHTML(view('admin.recibo.recibo', compact('a','aluno')));
-            $pdf->AddPage();
+            $pdf->WriteHTML(view('admin.recibo.recibo', compact('a','aluno')));            
+            if($count < sizeof($atv))
+                $pdf->AddPage();
+            $count++;
         }        
         $pdf->Output();
-        dd($atv);
     }
 }
