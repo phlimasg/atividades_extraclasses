@@ -20,6 +20,14 @@
                 <label for="email">Email</label>
                 <input type="email" name="email" value="{{old('email')}}" class="form-control">
             </div>
+            <div class="col-sm-2">
+                <label for="email">Perfil</label>
+                <select name="profile" id="" class="form-control">
+                    <option value=""></option>
+                    <option value="admin">Administrador</option>
+                    <option value="user">Usuário</option>
+                </select>
+            </div>
             <div class="col-sm-1">   
                 <br>
                 <button type="submit" class="btn btn-md btn-danger"><span class="glyphicon glyphicon-plus"></span> Adicionar</button>
@@ -43,6 +51,7 @@
         @endif
         <h3>Usuários Cadastrados</h3>
         @forelse ($user as $u)
+        <hr>
         <div class="row">
             <div class="col-sm-3">
                 {{$u->name}}
@@ -50,11 +59,13 @@
             <div class="col-sm-3">
                 {{$u->email}}
             </div>
+            <div class="col-sm-3">
+                {{$u->profile}}
+            </div>
             <div class="col-sm-1">
             <a href="" data-toggle="modal" data-target="#{{$u->id}}" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span></a>
-            </div>
-            <hr>
-        </div>
+            </div>            
+        </div>        
         <!-- Modal -->
 <div id="{{$u->id}}" class="modal fade" role="dialog">
         <div class="modal-dialog">

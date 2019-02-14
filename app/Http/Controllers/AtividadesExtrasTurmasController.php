@@ -7,6 +7,10 @@ use App\Model\atv_extra_turma;
 use Illuminate\Support\Facades\Auth;
 use App\Model\turmas;
 use App\Model\atv_extra_turmas_autorizadas;
+use App\Model\inscricao;
+use App\Model\espera;
+use App\Model\UVW_STE_ALUNOS_E_RESPONSAVEIS;
+use Mpdf\Mpdf;
 
 
 class AtividadesExtrasTurmasController extends Controller
@@ -91,15 +95,23 @@ class AtividadesExtrasTurmasController extends Controller
     public function show($id)
     {
         try {
-           $turma = atv_extra_turma::find($id);
-           //dd(atv_extra_turmas_autorizadas::get());
+           $turma = atv_extra_turma::find($id);           
            $turmas_aut = turmas::whereIn('id', 
-           atv_extra_turmas_autorizadas::select('turmas_id')
-           ->where('atv_extra_turma_id',$id)
-           ->get())           
+            atv_extra_turmas_autorizadas::select('turmas_id')
+            ->where('atv_extra_turma_id',$id)
+            ->get())           
            ->get();
-           //dd($turmas_aut);
-           return view('admin.atv_extra_turma.turma_show', compact('turma','turmas_aut'));
+           $insc = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','TURMA')
+           ->whereIn('RA',
+           inscricao::select('aluno_id')->where('atv_extra_turma_id',$id)->get()
+           )
+           ->get();
+           $espera = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','TURMA')
+           ->whereIn('RA',
+           espera::select('aluno_id')->where('atv_extra_turma_id',$id)->get()
+           )
+           ->get();
+           return view('admin.atv_extra_turma.turma_show', compact('turma','turmas_aut','insc','espera'));
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return view('errors.404',compact('message'));
@@ -138,5 +150,39 @@ class AtividadesExtrasTurmasController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function inscPdf($id){ 
+        try {
+            $insc = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','RESPACAD', 'RESPACADEMAIL','ANO','TURMA','TURNO_ALUNO','RESPACADTEL1','RESPACADTEL2')
+            ->whereIn('RA',inscricao::select('aluno_id')->where('atv_extra_turma_id',$id)->where('pagamento',1)->get())        
+            ->get();
+            $atv = atv_extra_turma::where('atv_extra_turmas.id',$id)
+            ->join('atv_extras','atv_extra_id','atv_extras.id')
+            ->first();
+            //dd($atv,$insc);
+            $pdf = new Mpdf(['tempDir' => storage_path('app\public')]);            
+            $pdf->WriteHTML(view('admin.recibo.lista', compact('insc','atv')));            
+            $pdf->Output();
+         } catch (\Exception $e) {
+            $message = $e->getMessage();
+            return view('errors.404',compact('message'));
+            }   
+    }
+    public function espera($id){ 
+        try {
+            $insc = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','RESPACAD', 'RESPACADEMAIL','ANO','TURMA','TURNO_ALUNO','RESPACADTEL1','RESPACADTEL2')
+            ->whereIn('RA',espera::select('aluno_id')->where('atv_extra_turma_id',$id)->get())        
+            ->get();
+            $atv = atv_extra_turma::where('atv_extra_turmas.id',$id)
+            ->join('atv_extras','atv_extra_id','atv_extras.id')
+            ->first();
+            //dd($atv,$insc);
+            $pdf = new Mpdf(['tempDir' => storage_path('app\public')]);            
+            $pdf->WriteHTML(view('admin.recibo.espera', compact('insc','atv')));            
+            $pdf->Output();
+         } catch (\Exception $e) {
+            $message = $e->getMessage();
+            return view('errors.404',compact('message'));
+            }   
     }
 }

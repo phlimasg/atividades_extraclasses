@@ -39,6 +39,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|regex:/^.+@lasalle.+$/i',
+            'profile' => 'required|string',
         ],
             [
                 'required' => 'Campo Obrigatório',
@@ -49,6 +50,7 @@ class UserController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->profile = $request->profile;
             $user->save();
             return redirect()->back()->with('message' , 'Usuário criado com sucesso!');
         }catch (\Exception $e) {

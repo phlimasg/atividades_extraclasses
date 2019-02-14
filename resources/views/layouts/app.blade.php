@@ -49,7 +49,7 @@
                                                     <span class="glyphicon glyphicon-plus"></span> Inscrever Aluno
                                                 </div>                                                
                                             </a>  
-                                            <a href="">
+                                            <a href="{{ route('cancel_index') }}">
                                                 <div class="submenu">
                                                     <span class="glyphicon glyphicon-remove"></span> Cancelar Inscrição
                                                 </div>                                                
