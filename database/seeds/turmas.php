@@ -13,35 +13,50 @@ class turmas extends Seeder
     public function run()
     {
       DB::table('turmas')->insert([
-        ['descricao' => '1º ano EF',
+        [//1
+          'descricao' => '1º ano EF',
         'cod' => 'EFER01A'],
-        ['descricao' => '2º ano EF',
+        [//2
+          'descricao' => '2º ano EF',
         'cod' => 'EFER02A'],        
-        ['descricao' => '3º ano EF',
+        [//3
+          'descricao' => '3º ano EF',
         'cod' => 'EFER03A'],
-        ['descricao' => '4º ano EF',
+        [//4
+          'descricao' => '4º ano EF',
         'cod' => 'EFER04A'],
-        ['descricao' => '5º ano EF',
+        [//5
+          'descricao' => '5º ano EF',
         'cod' => 'EFER05A'],
-        ['descricao' => '6º ano EF',
+        [//6
+          'descricao' => '6º ano EF',
         'cod' => 'EFER06A'],
-        ['descricao' => '7º ano EF',
+        [//7
+          'descricao' => '7º ano EF',
         'cod' => 'EFER07A'],
-        ['descricao' => '8º ano EF',
+        [//8
+          'descricao' => '8º ano EF',
         'cod' => 'EFER08A'],
-        ['descricao' => '9º ano EF',
+        [//9
+          'descricao' => '9º ano EF',
         'cod' => 'EFER09A'],
-        ['descricao' => '1º ano EM',
+        [//10
+          'descricao' => '1º ano EM',
         'cod' => 'EMER01A'],
-        ['descricao' => '2º ano EM',
+        [//11
+          'descricao' => '2º ano EM',
         'cod' => 'EMER02A'],
-        ['descricao' => '3º ano EM',
+        [//12
+          'descricao' => '3º ano EM',
         'cod' => 'EMER03A'],
-        ['descricao' => 'Creche III',
+        [//13
+          'descricao' => 'Creche III',
         'cod' => 'EIERCR3'],
-        ['descricao' => 'Pré I',
+        [//14
+          'descricao' => 'Pré I',
         'cod' => 'EIERP1'],
-        ['descricao' => 'Pré II',
+        [//15
+          'descricao' => 'Pré II',
         'cod' => 'EIERP2'],
       ]);
     }
