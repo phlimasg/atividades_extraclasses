@@ -11,7 +11,7 @@ class AtvExtrasTurmasTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('atv_extra_turmas')->truncate();
+        //DB::table('atv_extra_turmas')->truncate();
         DB::table('atv_extra_turmas')->insert([
             [
                 //1

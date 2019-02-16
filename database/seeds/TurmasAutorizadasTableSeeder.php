@@ -12,7 +12,7 @@ class TurmasAutorizadasTableSeeder extends Seeder
      */
     public function run()
     {        
-        DB::table('atv_extra_turmas_autorizadas')->truncate();
+        //DB::table('atv_extra_turmas_autorizadas')->truncate();
         DB::table('atv_extra_turmas_autorizadas')->insert([
             [
                 'user'=>'sistema',
