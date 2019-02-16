@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/inscricao', 'InscricaoController@search')->name('insc_search');
         Route::get('/inscricao/{ra}', 'InscricaoController@show')->name('insc_show');
         Route::post('/inscricao/{ra}', 'InscricaoController@store')->name('insc_store');        
+        Route::get('/recibo/{ra}', 'InscricaoController@exibe_recibo')->name('insc_exibe_recibo');
         Route::get('/pagamento/{ra}', 'InscricaoController@pagamento')->name('insc_pagamento');
         Route::get('/pagamento/{ra}/confirma', 'InscricaoController@recibo')->name('insc_recibo');
         Route::get('/remove/{id}', 'InscricaoController@destroy')->name('insc_destroy');

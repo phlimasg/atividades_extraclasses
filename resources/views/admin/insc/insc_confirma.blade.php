@@ -74,7 +74,7 @@
                     <p>Após confirmação, será gerado o recibo. </p>
                 </div>
                 <div class="modal-footer">
-                        <a href="{{ route('insc_recibo', ['id'=>Request::segment(2)]) }}" class="btn btn-success" >Sim</a>
+                        <a href="{{ route('insc_exibe_recibo', ['id'=>Request::segment(2)]) }}" class="btn btn-success" >Sim</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>

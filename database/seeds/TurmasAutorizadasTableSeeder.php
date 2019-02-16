@@ -315,14 +315,7 @@ class TurmasAutorizadasTableSeeder extends Seeder
                 'atv_extra_turma_id'=>'22',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'5',
-                'atv_extra_turma_id'=>'22',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
+            ],            
             [
                 'user'=>'sistema',
                 'turmas_id'=>'6',
@@ -670,97 +663,6 @@ class TurmasAutorizadasTableSeeder extends Seeder
                 'user'=>'sistema',
                 'turmas_id'=>'4',
                 'atv_extra_turma_id'=>'41',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'5',
-                'atv_extra_turma_id'=>'41',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'1',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'2',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'3',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'4',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'5',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'6',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'7',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'8',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'9',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'10',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'11',
-                'atv_extra_turma_id'=>'42',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'user'=>'sistema',
-                'turmas_id'=>'12',
-                'atv_extra_turma_id'=>'42',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
@@ -1700,6 +1602,55 @@ class TurmasAutorizadasTableSeeder extends Seeder
                 'user'=>'sistema',
                 'turmas_id'=>'12',
                 'atv_extra_turma_id'=>'79',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'user'=>'sistema',
+                'turmas_id'=>'6',
+                'atv_extra_turma_id'=>'81',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'user'=>'sistema',
+                'turmas_id'=>'7',
+                'atv_extra_turma_id'=>'81',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'user'=>'sistema',
+                'turmas_id'=>'8',
+                'atv_extra_turma_id'=>'81',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'user'=>'sistema',
+                'turmas_id'=>'9',
+                'atv_extra_turma_id'=>'81',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'user'=>'sistema',
+                'turmas_id'=>'1',
+                'atv_extra_turma_id'=>'82',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'user'=>'sistema',
+                'turmas_id'=>'2',
+                'atv_extra_turma_id'=>'82',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'user'=>'sistema',
+                'turmas_id'=>'10',
+                'atv_extra_turma_id'=>'31',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],

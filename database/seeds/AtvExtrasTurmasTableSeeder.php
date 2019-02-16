@@ -280,12 +280,12 @@ class AtvExtrasTurmasTableSeeder extends Seeder
                 'hora_fim'=>'15:00:00',                
                 'vagas' => '20',
                 'valor'=>'208',
-                'dia' => 'Quarta-Feira 13:30 às 15h| Sexta-Feira 10h às 11:30h',
+                'dia' => 'Quarta-Feira',
                 'user' => 'sistema',
                 'atv_extra_id' => '6',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
-            ],
+            ],            
             [
                 //22
                 'descricao_turma'=>'Turma 1',
@@ -358,7 +358,7 @@ class AtvExtrasTurmasTableSeeder extends Seeder
                 'hora_fim'=>'19:30:00',                
                 'vagas' => '20',
                 'valor'=>'208',
-                'dia' => 'Segunda-Feira | Quinta-Feira',
+                'dia' => 'Segunda-Feira',
                 'user' => 'sistema',
                 'atv_extra_id' => '9',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -511,7 +511,7 @@ class AtvExtrasTurmasTableSeeder extends Seeder
                 //39
                 'descricao_turma'=>'Turma 1',
                 'hora_ini'=>'12:20:00',
-                'hora_fim'=>'20:30:00',                
+                'hora_fim'=>'13:20:00',                
                 'vagas' => '20',
                 'valor'=>'00',
                 'dia' => 'Quinta-Feira',
@@ -524,7 +524,7 @@ class AtvExtrasTurmasTableSeeder extends Seeder
                 //40
                 'descricao_turma'=>'Turma 2',
                 'hora_ini'=>'12:20:00',
-                'hora_fim'=>'12:30:00',                
+                'hora_fim'=>'13:20:00',                
                 'vagas' => '20',
                 'valor'=>'00',
                 'dia' => 'Sexta-Feira',
@@ -722,7 +722,7 @@ class AtvExtrasTurmasTableSeeder extends Seeder
                 'hora_fim'=>'19:00:00',                
                 'vagas' => '20',
                 'valor'=>'95',
-                'dia' => 'Quinta-Feira | Sexta-Feira',
+                'dia' => 'Segunda-Feira | Quarta-Feira',
                 'user' => 'sistema',
                 'atv_extra_id' => '22',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -731,11 +731,11 @@ class AtvExtrasTurmasTableSeeder extends Seeder
             [
                 //56
                 'descricao_turma'=>'Turma 2',
-                'hora_ini'=>'18:00:00',
+                'hora_ini'=>'19:00:00',
                 'hora_fim'=>'19:50:00',                
                 'vagas' => '20',
                 'valor'=>'95',
-                'dia' => 'Quinta-Feira | Sexta-Feira',
+                'dia' => 'Segunda-Feira | Quarta-Feira',
                 'user' => 'sistema',
                 'atv_extra_id' => '22',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -813,7 +813,7 @@ class AtvExtrasTurmasTableSeeder extends Seeder
                 'hora_fim'=>'19:45:00',                
                 'vagas' => '20',
                 'valor'=>'150',
-                'dia' => 'Segunda-Feira | Quarta-Feira',
+                'dia' => 'Terça-Feira | Quinta-Feira',
                 'user' => 'sistema',
                 'atv_extra_id' => '23',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -1021,7 +1021,7 @@ class AtvExtrasTurmasTableSeeder extends Seeder
                 'hora_fim'=>'13:40:00',                
                 'vagas' => '35',
                 'valor'=>'30',
-                'dia' => 'Quinta-Feira',
+                'dia' => 'Sexta-Feira',
                 'user' => 'sistema',
                 'atv_extra_id' => '27',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -1042,7 +1042,7 @@ class AtvExtrasTurmasTableSeeder extends Seeder
             ],
             [
                 //80
-                'descricao_turma'=>'Turma 1',
+                'descricao_turma'=>'Turma 7',
                 'hora_ini'=>'12:00:00',
                 'hora_fim'=>'13:30:00',                
                 'vagas' => '20',
@@ -1053,7 +1053,32 @@ class AtvExtrasTurmasTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
-
+            [
+                //81
+                'descricao_turma'=>'Turma 2',
+                'hora_ini'=>'10:00:00',
+                'hora_fim'=>'11:30:00',                
+                'vagas' => '20',
+                'valor'=>'208',
+                'dia' => 'Sexta-Feira',
+                'user' => 'sistema',
+                'atv_extra_id' => '6',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                //82
+                'descricao_turma'=>'Turma 4 - 6 e 7 anos',
+                'hora_ini'=>'18:00:00',
+                'hora_fim'=>'19:30:00',                
+                'vagas' => '20',
+                'valor'=>'208',
+                'dia' => 'Quinta-Feira',
+                'user' => 'sistema',
+                'atv_extra_id' => '9',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
 
         ]);
     }

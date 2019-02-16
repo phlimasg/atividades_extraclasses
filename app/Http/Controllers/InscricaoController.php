@@ -191,4 +191,7 @@ class InscricaoController extends Controller
         }        
         $pdf->Output();
     }
+    public function exibe_recibo(){
+        return view('admin.insc.insc_recibo');
+    }
 }
