@@ -11,6 +11,7 @@ class AtvExtrasTurmasTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('atv_extra_turmas')->truncate();
         DB::table('atv_extra_turmas')->insert([
             [
                 //1
@@ -1036,6 +1037,19 @@ class AtvExtrasTurmasTableSeeder extends Seeder
                 'dia' => 'Terça-Feira',
                 'user' => 'sistema',
                 'atv_extra_id' => '28',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                //80
+                'descricao_turma'=>'Turma 1',
+                'hora_ini'=>'12:00:00',
+                'hora_fim'=>'13:30:00',                
+                'vagas' => '20',
+                'valor'=>'340',
+                'dia' => 'Quarta-Feira',
+                'user' => 'sistema',
+                'atv_extra_id' => '26',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
