@@ -104,8 +104,7 @@ class AtividadesExtrasTurmasController extends Controller
            $insc = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','TURMA')
            ->whereIn('RA',
            inscricao::select('aluno_id')->where('atv_extra_turma_id',$id)->get()
-           )
-           ->orderBy('created_at')
+           )           
            ->get();
            $espera = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','TURMA')
            ->whereIn('RA',
