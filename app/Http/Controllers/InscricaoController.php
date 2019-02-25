@@ -99,8 +99,10 @@ class InscricaoController extends Controller
             //pega a turma do aluno
             $aluno = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA', 'NOME_ALUNO', 'TURMA','ANO')
             ->where('RA',$id)
-            ->first();            
+            ->first();              
             $turma = substr($aluno->TURMA,0,7);
+            dd($aluno,$turma);
+            
             //pesquisa as atividades para o aluno
             $atv = atv_extra::select('vagas','atv_extra_turmas.atv_extra_id', 'descricao_atv', 'atv_extra_turmas.id', 'descricao_turma', 'hora_ini', 'hora_fim', 'valor', 'dia')            
             ->join('atv_extra_turmas', 'atv_extras.id', 'atv_extra_id') 
