@@ -101,7 +101,7 @@ class InscricaoController extends Controller
             ->where('RA',$id)
             ->first();              
             $turma = substr($aluno->TURMA,0,7);
-            dd($aluno,$turma);
+            //dd($aluno,$turma);
             
             //pesquisa as atividades para o aluno
             $atv = atv_extra::select('vagas','atv_extra_turmas.atv_extra_id', 'descricao_atv', 'atv_extra_turmas.id', 'descricao_turma', 'hora_ini', 'hora_fim', 'valor', 'dia')            
