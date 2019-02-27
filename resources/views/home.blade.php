@@ -4,6 +4,11 @@
 <div class="container-fluid">
     <h1>
         Dashboard
-    </h1>    
+    </h1> 
+    @if (!empty($up))
+        <div class="alert alert-danger">
+            {{$up}}
+        </div>       
+    @endif
 </div>
 @endsection

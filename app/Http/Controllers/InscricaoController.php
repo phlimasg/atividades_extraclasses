@@ -100,8 +100,7 @@ class InscricaoController extends Controller
             $aluno = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA', 'NOME_ALUNO', 'TURMA','ANO')
             ->where('RA',$id)
             ->first();              
-            $turma = substr($aluno->TURMA,0,7);
-            //dd($aluno,$turma);
+            $turma = substr($aluno->TURMA,0,7);          
             
             //pesquisa as atividades para o aluno
             $atv = atv_extra::select('vagas','atv_extra_turmas.atv_extra_id', 'descricao_atv', 'atv_extra_turmas.id', 'descricao_turma', 'hora_ini', 'hora_fim', 'valor', 'dia')            
@@ -171,15 +170,13 @@ class InscricaoController extends Controller
         return view('admin.insc.insc_confirma', compact('atv','espera'));
     }
     public function recibo($ra){
-        $aluno = UVW_STE_ALUNOS_E_RESPONSAVEIS::where('RA',$ra)->select('NOME_ALUNO','RESPFIN')->first();
-        //dd($aluno);
+        $aluno = UVW_STE_ALUNOS_E_RESPONSAVEIS::where('RA',$ra)->select('NOME_ALUNO','RESPFIN')->first();        
         $atv = inscricao::where('inscricaos.aluno_id', $ra)
         ->where('pagamento',0)
         ->select('inscricaos.id','valor','descricao_turma','descricao_atv','hora_ini','hora_fim','dia','pagamento')
         ->join('atv_extra_turmas','inscricaos.atv_extra_turma_id','atv_extra_turmas.id')
         ->join('atv_extras', 'atv_extra_turmas.atv_extra_id','atv_extras.id')
-        ->get();
-        //dd($atv);
+        ->get();        
         $pdf = new Mpdf(['tempDir' => storage_path('app\public')]);
         $count = 1;        
         foreach($atv as $a){

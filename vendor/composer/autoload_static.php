@@ -472,6 +472,7 @@ class ComposerStaticInitbacecda1b68372de6c2867c3f016732c
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\totvs' => __DIR__ . '/../..' . '/app/totvs.php',
         'AtvExtrasTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AtvExtrasTableSeeder.php',
         'AtvExtrasTurmasTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AtvExtrasTurmasTableSeeder.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',

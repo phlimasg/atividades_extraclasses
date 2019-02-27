@@ -11,6 +11,7 @@ use App\Model\inscricao;
 use App\Model\espera;
 use App\Model\UVW_STE_ALUNOS_E_RESPONSAVEIS;
 use Mpdf\Mpdf;
+use App\Model\totvs;
 
 
 class AtividadesExtrasTurmasController extends Controller
@@ -106,10 +107,15 @@ class AtividadesExtrasTurmasController extends Controller
            inscricao::select('aluno_id')->where('atv_extra_turma_id',$id)->get()
            )           
            ->get();
-           $espera = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','TURMA')
+           /*$espera = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','TURMA')
            ->whereIn('RA',
            espera::select('aluno_id')->where('atv_extra_turma_id',$id)->orderBy('created_at')->get()
            )           
+           ->get();*/
+           $espera = totvs::select('RA','NOME_ALUNO','TURMA')
+           ->join('esperas','RA','aluno_id')
+           ->where('atv_extra_turma_id',$id)
+           ->orderBy('esperas.id')
            ->get();
            return view('admin.atv_extra_turma.turma_show', compact('turma','turmas_aut','insc','espera'));
         } catch (\Exception $e) {
@@ -170,9 +176,14 @@ class AtividadesExtrasTurmasController extends Controller
     }
     public function espera($id){ 
         try {
-            $insc = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','RESPACAD', 'RESPACADEMAIL','ANO','TURMA','TURNO_ALUNO','RESPACADTEL1','RESPACADTEL2')
+            /*$insc = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','RESPACAD', 'RESPACADEMAIL','ANO','TURMA','TURNO_ALUNO','RESPACADTEL1','RESPACADTEL2')
             ->whereIn('RA',espera::select('aluno_id')->where('atv_extra_turma_id',$id)->get())        
-            ->get();
+            ->get();*/
+            $insc = totvs::select('RA','NOME_ALUNO','RESPACAD', 'RESPACADEMAIL','ANO','TURMA','TURNO_ALUNO','RESPACADTEL1','RESPACADTEL2')
+           ->join('esperas','RA','aluno_id')
+           ->where('atv_extra_turma_id',$id)
+           ->orderBy('esperas.id')
+           ->get();
             $atv = atv_extra_turma::where('atv_extra_turmas.id',$id)
             ->join('atv_extras','atv_extra_id','atv_extras.id')
             ->first();

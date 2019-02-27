@@ -43,6 +43,7 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\totvs' => $baseDir . '/app/totvs.php',
     'AtvExtrasTableSeeder' => $baseDir . '/database/seeds/AtvExtrasTableSeeder.php',
     'AtvExtrasTurmasTableSeeder' => $baseDir . '/database/seeds/AtvExtrasTurmasTableSeeder.php',
     'BeyondCode\\DumpServer\\DumpServerCommand' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
