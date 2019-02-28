@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/atividades/turma/update/{id}','AtividadesExtrasTurmasController@update')->name('turmas_update');
     Route::get('/atividades/turma/inscritos/{id}','AtividadesExtrasTurmasController@inscPdf')->name('turmas_insc');
     Route::get('/atividades/turma/espera/{id}','AtividadesExtrasTurmasController@espera')->name('turmas_espera');
+    Route::get('/atividades/turma/troca/{id}/{ra}','AtividadesExtrasTurmasController@troca')->name('turmas_troca');
+    Route::post('/atividades/turma/troca/{id}/{ra}','AtividadesExtrasTurmasController@trocasave')->name('turmas_troca_save');
     //Rotas de inscrições
     Route::group(['middleware' => ['profile']], function () {
         Route::get('/inscricao', 'InscricaoController@index')->name('insc_index');

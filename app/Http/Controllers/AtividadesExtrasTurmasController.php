@@ -102,10 +102,10 @@ class AtividadesExtrasTurmasController extends Controller
             ->where('atv_extra_turma_id',$id)
             ->get())           
            ->get();
-           $insc = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','TURMA')
+           $insc = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','TURMA','RESPACAD','RESPACADEMAIL','RESPACADTEL1','RESPACADTEL2','RESPFIN','RESPFINEMAIL','RESPFINTEL1','RESPFINCEL')
            ->whereIn('RA',
-           inscricao::select('aluno_id')->where('atv_extra_turma_id',$id)->get()
-           )           
+           inscricao::select('aluno_id')->where('atv_extra_turma_id',$id)->where('pagamento',1)->get()
+           )
            ->get();
            /*$espera = UVW_STE_ALUNOS_E_RESPONSAVEIS::select('RA','NOME_ALUNO','TURMA')
            ->whereIn('RA',
@@ -194,6 +194,32 @@ class AtividadesExtrasTurmasController extends Controller
          } catch (\Exception $e) {
             $message = $e->getMessage();
             return view('errors.404',compact('message'));
-            }   
+        }   
+    }
+    public function troca($id,$ra){
+        try {            
+            $atv = atv_extra_turma::join('atv_extras','atv_extra_turmas.atv_extra_id','atv_extras.id')
+            ->select('atv_extra_turmas.id','descricao_turma','hora_ini','hora_fim','dia')
+            ->whereIn('atv_extras.id',atv_extra_turma::select('atv_extra_id')->where('id',$id)->get())
+            ->get();
+            $aluno =  UVW_STE_ALUNOS_E_RESPONSAVEIS::select('NOME_ALUNO')->where('RA', $ra)->first();
+            return view('admin.atv_extra_turma.turma_troca',compact('atv','aluno'));
+         } catch (\Exception $e) {
+            $message = $e->getMessage();
+            return view('errors.404',compact('message'));
+        } 
+    }
+    public function trocasave(Request $request){
+        try {
+            $insc =  inscricao::where('aluno_id',$request->ra)
+            ->where('atv_extra_turma_id',$request->turma_old)
+            ->first();
+            $insc->atv_extra_turma_id = $request->turma;
+            $insc->save();
+            return redirect()->route('turmas_show',['id'=>$request->turma_old]);
+         } catch (\Exception $e) {
+            $message = $e->getMessage();
+            return view('errors.404',compact('message'));
+        }
     }
 }

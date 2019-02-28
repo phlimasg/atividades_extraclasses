@@ -67,15 +67,57 @@
                             <tr>
                                 <th>RA</th>
                                 <th>Nome</th>
-                                <th>Turma</th>                                 
+                                <th>Turma</th>
+                                <th></th>                                 
                             </tr>
                             </thead>
                             <tbody>
                         @forelse ($insc as $i)
                         <tr>
                                 <td>{{$i->RA}}</td>
-                                <td>{{$i->NOME_ALUNO}}</td>
-                                <td>{{$i->TURMA}}</td>                                  
+                                <td><a href="#" data-toggle="modal" data-target="#{{$i->RA}}">{{$i->NOME_ALUNO}}</a></td>
+                                <div id="{{$i->RA}}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                      
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">Dados do Aluno</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                              <div class="row">
+                                              <div class="col-sm-6">
+                                                  <p><b>Resp. Acad.:</b>{{$i->RESPACAD}}</p>
+                                                  <p><b>Email:</b>{{$i->RESPACADEMAIL}}</p>
+                                                  <p><b>Tel:</b>{{$i->RESPACADTEL1}} - {{$i->RESPACADTEL2}}</p>                                                  
+                                                </div>
+                                                  <div class="col-sm-6">
+                                                        <p><b>Resp. Fin.:</b>{{$i->RESPFIN}}</p>
+                                                        <p><b>Email:</b>{{$i->RESPFINEMAIL}}</p>
+                                                        <p><b>Tel:</b>{{$i->RESPFINTEL1}} - {{$i->RESPFINCEL}}</p>  
+                                                  </div>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                            </div>
+                                          </div>
+                                      
+                                        </div>
+                                      </div>
+                                <td>{{$i->TURMA}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{{ route('turmas_troca', ['id'=>Request::segment(4),'ra'=>$i->RA]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> Trocar de turma</a>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="{{ route('cancel_show', ['id'=>$i->RA]) }}">Cancelar</a></li>                                        
+                                        </ul>
+                                    </div>                                         
+                                </td>                                 
                             </tr>
                         @empty
                             Ninguém inscrito
@@ -100,6 +142,7 @@
                             <th>RA</th>
                             <th>Nome</th>
                             <th>Turma</th>                                 
+                            <th></th> 
                         </tr>
                         </thead>
                         <tbody>
@@ -107,7 +150,18 @@
                     <tr>
                             <td>{{$i->RA}}</td>
                             <td>{{$i->NOME_ALUNO}}</td>
-                            <td>{{$i->TURMA}}</td>                                  
+                            <td>{{$i->TURMA}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary">Inscrever</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Remover</a></li>                                        
+                                    </ul>
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         Ninguém inscrito
