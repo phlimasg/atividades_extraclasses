@@ -211,11 +211,17 @@ class AtividadesExtrasTurmasController extends Controller
     }
     public function trocasave(Request $request){
         try {
-            $insc =  inscricao::where('aluno_id',$request->ra)
-            ->where('atv_extra_turma_id',$request->turma_old)
-            ->first();
-            $insc->atv_extra_turma_id = $request->turma;
-            $insc->save();
+            $vagas = atv_extra_turma::select('vagas')->where('id',$request->turma)->first();
+            $inscritos = inscricao::where('atv_extra_turma_id',$request->turma_old)->count();
+            if($vagas->vagas >= $inscritos){
+                $insc =  inscricao::where('aluno_id',$request->ra)
+                ->where('atv_extra_turma_id',$request->turma_old)
+                ->first();
+                $insc->atv_extra_turma_id = $request->turma;
+                $insc->save();
+            }else{
+                abort('404', 'Ooooops...  Não há vagas para essa turma.');
+            }                
             return redirect()->route('turmas_show',['id'=>$request->turma_old]);
          } catch (\Exception $e) {
             $message = $e->getMessage();
