@@ -32,7 +32,7 @@ class HomeController extends Controller
         dd(totvs::select('RA')->orderBy('RA')->limit(2000,2000)->get());     */
         $grafico = inscricao::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')
         ->join('atv_extras','atv_extra_id','atv_extras.id')
-        ->selectRaw('descricao_atv, count(*) as insc')
+        ->selectRaw('atv_extras.id, descricao_atv, count(*) as insc')
         ->groupBy('atv_extras.id')
         ->orderBy('descricao_atv')
         ->get();

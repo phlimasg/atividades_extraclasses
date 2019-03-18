@@ -51,14 +51,14 @@ function drawBarColors() {
                 <thead>
                   <tr>
                     <th>Atividade</th>
-                    <th>Quantidade</th>                   
+                    <th>Inscritos</th>                   
                   </tr>
                 </thead>
                 <tbody>
                   
                     @foreach($grafico as $g)
                     <tr>
-                      <td>{{$g->descricao_atv}}</td>
+                    <td> <a href="{{ route('atividades_show', ['id'=>$g->id]) }}">{{$g->descricao_atv}}</a></td>
                       <td>{{$g->insc}}</td>
                     </tr>
                     @endforeach                      
