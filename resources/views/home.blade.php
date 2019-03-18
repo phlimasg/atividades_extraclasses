@@ -44,7 +44,7 @@ function drawBarColors() {
 
     </script>
     <div class="row">
-      <div id="chart_div" class="col-sm-8" style="height: 500px;"></div>
+      <div id="chart_div" class="col-sm-8" style="min-height: 600px;"></div>
       <div class="col-sm-4">
           <div class="table-responsive">          
               <table class="table">
