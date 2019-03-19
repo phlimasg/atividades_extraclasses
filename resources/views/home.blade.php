@@ -39,6 +39,7 @@
       <li><a data-toggle="tab" href="#menu1">Últimos Inscritos</a></li>
       <li><a data-toggle="tab" href="#menu2">Cancelamentos</a></li>
       <li><a data-toggle="tab" href="#menu3">Trocas</a></li>
+      <li><a data-toggle="tab" href="#menu4">Caixa</a></li>
     </ul>
     <div class="tab-content">
       <div id="home" class="tab-pane fade in active">
@@ -120,6 +121,23 @@
                 </tbody>
               </table>
           </div>
+      </div>
+      <div id="menu3" class="tab-pane fade">
+        <div class="row">
+          <div class="col-sm-2">
+              <p>Em Construção....</p>  
+            <div style="width:100%;height:0;padding-bottom:72%;position:relative;"><iframe src="https://giphy.com/embed/p4NLw3I4U0idi" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+          </div>
+        </div>
+      </div>
+      <div id="menu4" class="tab-pane fade">
+        @if (Auth()->user()->profile == 'admin' )
+          <h3>Inscrições de hoje</h3>
+          <h1>R$: {{$insc_hj}}</h1>    
+        @else
+            Nada para ver aqui...
+        @endif
+        
       </div>
     </div>
 @endsection

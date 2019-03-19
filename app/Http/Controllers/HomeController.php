@@ -47,6 +47,10 @@ class HomeController extends Controller
         ->orderBy('inscricaos.created_at','desc')
         ->limit(100)
         ->get();
+        $insc_hj = inscricao::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')                
+        ->where('pagamento',1)
+        ->where('inscricaos.created_at','like',date('Y-m-d'))
+        ->sum('valor');        
         $cancel = cancelamento::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')
         ->join('atv_extras','atv_extra_id','atv_extras.id')
         ->join('totvs','aluno_id','totvs.RA')
@@ -82,8 +86,8 @@ class HomeController extends Controller
                 $local->save();
             }
             $up = 'Base de alunos atualizada.';
-            return view('home',compact('up','grafico','inscritos','cancel'));
+            return view('home',compact('up','grafico','inscritos','cancel','insc_hj'));
         }        
-        return view('home',compact('grafico','inscritos','cancel'));
+        return view('home',compact('grafico','inscritos','cancel','insc_hj'));
     }
 }
