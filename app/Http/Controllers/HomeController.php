@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\totvs;
 use App\Model\UVW_STE_ALUNOS_E_RESPONSAVEIS;
 use App\Model\inscricao;
+use App\Model\cancelamento;
 
 class HomeController extends Controller
 {
@@ -33,9 +34,28 @@ class HomeController extends Controller
         $grafico = inscricao::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')
         ->join('atv_extras','atv_extra_id','atv_extras.id')
         ->selectRaw('atv_extras.id, descricao_atv, count(*) as insc')
+        ->where('pagamento',1)
         ->groupBy('atv_extras.id')
         ->orderBy('descricao_atv')
         ->get();
+        $inscritos = inscricao::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')
+        ->join('atv_extras','atv_extra_id','atv_extras.id')
+        ->join('totvs','aluno_id','totvs.RA')
+        ->where('pagamento',1)
+        ->select('totvs.NOME_ALUNO','atv_extra_turmas.descricao_turma','descricao_atv','inscricaos.created_at','atv_extra_turmas.id')
+        ->groupBy('totvs.NOME_ALUNO','atv_extra_turmas.descricao_turma','descricao_atv','inscricaos.created_at','atv_extra_turmas.id')
+        ->orderBy('inscricaos.created_at')
+        ->limit(100)
+        ->get();
+        $cancel = cancelamento::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')
+        ->join('atv_extras','atv_extra_id','atv_extras.id')
+        ->join('totvs','aluno_id','totvs.RA')
+        ->select('totvs.NOME_ALUNO','atv_extra_turmas.descricao_turma','descricao_atv','cancelamentos.created_at','cancelamentos.user')
+        ->groupBy('totvs.NOME_ALUNO','atv_extra_turmas.descricao_turma','descricao_atv','cancelamentos.created_at','cancelamentos.user')
+        ->orderBy('cancelamentos.created_at')
+        ->limit(100)
+        ->get();
+        //dd($inscritos);
         $count1 = UVW_STE_ALUNOS_E_RESPONSAVEIS::count();
         $count2 = totvs::count();        
         if ($count1 > $count2) {
@@ -62,8 +82,8 @@ class HomeController extends Controller
                 $local->save();
             }
             $up = 'Base de alunos atualizada.';
-            return view('home',compact('up','grafico'));
+            return view('home',compact('up','grafico','inscritos','cancel'));
         }        
-        return view('home',compact('grafico'));
+        return view('home',compact('grafico','inscritos','cancel'));
     }
 }
