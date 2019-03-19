@@ -49,8 +49,9 @@ class HomeController extends Controller
         ->get();
         $insc_hj = inscricao::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')                
         ->where('pagamento',1)
-        ->where('inscricaos.created_at','like',date('Y-m-d'))
-        ->sum('valor');        
+        ->where('inscricaos.created_at','like',date('Y-m-d').'%')
+        ->sum('valor');
+        //dd(date('Y-m-d'));
         $cancel = cancelamento::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')
         ->join('atv_extras','atv_extra_id','atv_extras.id')
         ->join('totvs','aluno_id','totvs.RA')
