@@ -44,7 +44,7 @@ class HomeController extends Controller
         ->where('pagamento',1)
         ->select('totvs.NOME_ALUNO','atv_extra_turmas.descricao_turma','descricao_atv','inscricaos.created_at','atv_extra_turmas.id')
         ->groupBy('totvs.NOME_ALUNO','atv_extra_turmas.descricao_turma','descricao_atv','inscricaos.created_at','atv_extra_turmas.id')
-        ->orderBy('inscricaos.created_at')
+        ->orderBy('inscricaos.created_at','desc')
         ->limit(100)
         ->get();
         $cancel = cancelamento::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')
@@ -52,7 +52,7 @@ class HomeController extends Controller
         ->join('totvs','aluno_id','totvs.RA')
         ->select('totvs.NOME_ALUNO','atv_extra_turmas.descricao_turma','descricao_atv','cancelamentos.created_at','cancelamentos.user')
         ->groupBy('totvs.NOME_ALUNO','atv_extra_turmas.descricao_turma','descricao_atv','cancelamentos.created_at','cancelamentos.user')
-        ->orderBy('cancelamentos.created_at')
+        ->orderBy('cancelamentos.created_at','desc')
         ->limit(100)
         ->get();
         //dd($inscritos);
