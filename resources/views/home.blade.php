@@ -44,7 +44,7 @@
     <div class="tab-content">
       <div id="home" class="tab-pane fade in active">
         <div class="row">
-          <div id="chart_div" class="col-sm-8" style="height: 100vh"></div>
+          <div id="chart_div" class="col-sm-8" style="height: 100vh"><img src="https://i.redd.it/ounq1mw5kdxy.gif" alt="" class="img-responsive"></div>          
           <div class="col-sm-4">
               <div class="table-responsive">          
                   <table class="table">
@@ -85,7 +85,7 @@
                     <td> {{$i->NOME_ALUNO}}</td>
                     <td> {{$i->descricao_atv}}</td>
                     <td> <a href="{{ route('turmas_show', ['id'=>$i->id]) }}"> {{$i->descricao_turma}}</a></td>
-                    <td> {{$i->created_at}}</td>
+                    <td> {{date_format($i->created_at, 'd/m/Y H:i:s')}}</td>
                     </tr>
                     @empty
                     <h3>Nada para listar</h3>
@@ -112,7 +112,7 @@
                     <td> {{$i->NOME_ALUNO}}</td>
                     <td> {{$i->descricao_atv}}</td>
                     <td> {{$i->descricao_turma}}</td>
-                    <td> {{$i->created_at}}</td>
+                    <td> {{date_format($i->created_at, 'd/m/Y H:i:s')}}</td>
                     <td> {{$i->user}}</td>
                     </tr>
                     @empty
@@ -123,12 +123,34 @@
           </div>
       </div>
       <div id="menu3" class="tab-pane fade">
-        <div class="row">
-          <div class="col-sm-2">
-              <p>Em Construção....</p>  
-            <div style="width:100%;height:0;padding-bottom:72%;position:relative;"><iframe src="https://giphy.com/embed/p4NLw3I4U0idi" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
-          </div>
-        </div>
+        <div class="table-responsive">          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Atividade</th>
+                <th>Origem</th>
+                <th>Destino</th>
+                <th>Data da troca</th>
+                <th>Usuário</th>
+              </tr>
+            </thead>
+            <tbody>
+                @forelse ($troca as $i)
+                <tr>
+                <td> {{$i->NOME_ALUNO}}</td>
+                <td> {{$i->descricao_atv}}</td>
+                <td class="text-danger"> {{$i->origem}}</td>
+                <td class="text-success"> {{$i->destino}}</td>
+                <td> {{date_format($i->created_at, 'd/m/Y H:i:s')}}</td>
+                <td> {{$i->user}}</td>
+                </tr>
+                @empty
+                <h3>Nada para listar</h3>
+                @endforelse                                      
+            </tbody>
+          </table>
+      </div>
       </div>
       <div id="menu4" class="tab-pane fade">
         @if (Auth()->user()->profile == 'admin' )

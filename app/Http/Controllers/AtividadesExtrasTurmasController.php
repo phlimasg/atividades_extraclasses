@@ -12,6 +12,7 @@ use App\Model\espera;
 use App\Model\UVW_STE_ALUNOS_E_RESPONSAVEIS;
 use Mpdf\Mpdf;
 use App\Model\totvs;
+use App\Model\turmas_troca;
 
 
 class AtividadesExtrasTurmasController extends Controller
@@ -211,6 +212,13 @@ class AtividadesExtrasTurmasController extends Controller
     }
     public function trocasave(Request $request){
         try {
+            
+            $troca = new turmas_troca();
+            $troca->aluno_id = $request->ra;
+            $troca->turma_origem = $request->turma_old;
+            $troca->turma_destino = $request->turma;
+            $troca->user = Auth()->user()->email;
+            $troca->save();            
             $vagas = atv_extra_turma::select('vagas')->where('id',$request->turma)->first();
             $inscritos = inscricao::where('atv_extra_turma_id',$request->turma_old)->count();
             if($vagas->vagas >= $inscritos){

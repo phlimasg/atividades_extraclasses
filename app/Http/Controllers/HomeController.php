@@ -7,6 +7,7 @@ use App\Model\totvs;
 use App\Model\UVW_STE_ALUNOS_E_RESPONSAVEIS;
 use App\Model\inscricao;
 use App\Model\cancelamento;
+use App\Model\turmas_troca;
 
 class HomeController extends Controller
 {
@@ -51,7 +52,18 @@ class HomeController extends Controller
         ->where('pagamento',1)
         ->where('inscricaos.created_at','like',date('Y-m-d').'%')
         ->sum('valor');
-        //dd(date('Y-m-d'));
+        
+        $troca = turmas_troca::join('atv_extra_turmas','turma_origem','atv_extra_turmas.id')        
+        ->join('atv_extras','atv_extra_id','atv_extras.id')
+        ->join('totvs','aluno_id','totvs.RA')
+        ->select('totvs.NOME_ALUNO','descricao_atv','turmas_trocas.created_at','turmas_trocas.user')
+        ->selectRaw('(SELECT atv_extra_turmas.descricao_turma from atv_extra_turmas WHERE id = turmas_trocas.turma_origem) as origem')
+        ->selectRaw('(SELECT atv_extra_turmas.descricao_turma from atv_extra_turmas WHERE id = turmas_trocas.turma_destino) as destino')
+        ->groupBy('totvs.NOME_ALUNO','descricao_atv','turmas_trocas.created_at','turmas_trocas.user','origem','destino')
+        ->orderBy('turmas_trocas.created_at','desc')
+        ->limit(100)
+        ->get();        
+        
         $cancel = cancelamento::join('atv_extra_turmas','atv_extra_turma_id','atv_extra_turmas.id')
         ->join('atv_extras','atv_extra_id','atv_extras.id')
         ->join('totvs','aluno_id','totvs.RA')
@@ -87,8 +99,8 @@ class HomeController extends Controller
                 $local->save();
             }
             $up = 'Base de alunos atualizada.';
-            return view('home',compact('up','grafico','inscritos','cancel','insc_hj'));
+            return view('home',compact('up','grafico','inscritos','cancel','insc_hj','troca'));
         }        
-        return view('home',compact('grafico','inscritos','cancel','insc_hj'));
+        return view('home',compact('grafico','inscritos','cancel','insc_hj','troca'));
     }
 }
